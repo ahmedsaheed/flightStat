@@ -3,6 +3,7 @@ import 'Screens/Favourites/favPage.dart';
 import 'Screens/Home/homeScreen.dart';
 import 'Screens/Jobs/jobPage.dart';
 import 'Screens/Profile/profilePage.dart';
+import 'Screens/companies/CompanyPage.dart';
 
 class ButtomNav extends StatelessWidget {
   const ButtomNav();
@@ -14,6 +15,10 @@ class ButtomNav extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.building_2_fill),
+            label: 'Comapanies',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.heart),
@@ -30,7 +35,7 @@ class ButtomNav extends StatelessWidget {
         ],
       ),
       tabBuilder: (BuildContext context, int index) {
-        assert(index >= 0 && index <= 4);
+        assert(index >= 0 && index <= 5);
         switch (index) {
           case 0:
             return CupertinoTabView(
@@ -39,15 +44,20 @@ class ButtomNav extends StatelessWidget {
             break;
           case 1:
             return CupertinoTabView(
-              builder: (BuildContext context) => FavePage(),
+              builder: (BuildContext context) => CompanyPage(),
             );
             break;
           case 2:
             return CupertinoTabView(
-              builder: (BuildContext context) => JobPage(),
+              builder: (BuildContext context) => FavePage(),
             );
             break;
           case 3:
+            return CupertinoTabView(
+              builder: (BuildContext context) => JobPage(),
+            );
+            break;
+          case 4:
             return CupertinoTabView(
               builder: (BuildContext context) => ProfilePage(),
             );
