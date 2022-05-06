@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage();
   @override
-  @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
@@ -44,22 +43,22 @@ class HomePage extends StatelessWidget {
         switch (index) {
           case 0:
             return CupertinoTabView(
-              builder: (BuildContext context) => buildPage("Home"),
+              builder: (BuildContext context) => HomeScreen(),
             );
             break;
           case 1:
             return CupertinoTabView(
-              builder: (BuildContext context) => buildPage("Fav"),
+              builder: (BuildContext context) => FavePage(),
+            );
+            break;
+          case 2:
+            return CupertinoTabView(
+              builder: (BuildContext context) => JobPage(),
             );
             break;
           case 3:
             return CupertinoTabView(
-              builder: (BuildContext context) => buildPage("Jobs"),
-            );
-            break;
-          case 3:
-            return CupertinoTabView(
-              builder: (BuildContext context) => buildPage("Profile"),
+              builder: (BuildContext context) => ProfilePage(),
             );
             break;
         }
@@ -101,7 +100,7 @@ class JobPage extends StatelessWidget {
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const Center(child: Text("Profile"));
   }
 }
 
