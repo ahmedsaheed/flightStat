@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
+import 'Screens/Favourites/favPage.dart';
+import 'Screens/Home/homeScreen.dart';
+import 'Screens/Jobs/jobPage.dart';
+import 'Screens/Profile/profilePage.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -63,46 +68,19 @@ class HomePage extends StatelessWidget {
             break;
         }
         return CupertinoTabView(
-          builder: (BuildContext context) => buildPage("Profile"),
+          builder: (BuildContext context) => HomeScreen(),
         );
       },
     );
   }
-
-  Widget buildPage(String title) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(middle: Text(title)),
-        child: Center(child: Center(child: Text(title))));
-  }
 }
 
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Homes"));
-  }
-}
 
-class FavePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Favourite"));
-  }
-}
 
-class JobPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Job"));
-  }
-}
 
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text("Profile"));
-  }
-}
+
+
+
 
 
 
