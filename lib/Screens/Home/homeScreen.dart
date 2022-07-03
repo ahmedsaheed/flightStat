@@ -10,59 +10,45 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
         body: Container(
-            height: SizeConfig.screenHeight,
+            height: SizeConfig.screenHeight / 1.8,
             decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.zero,
+                  topRight: Radius.zero,
+                  bottomLeft: Radius.circular(50.0),
+                  bottomRight: Radius.zero,
+                ),
                 gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              // stops: [
-              //   0.1,
-              //   0.4,
-              //   0.6,
-              //   0.9,
-              // ],
-              colors: [
-                // Colors.yellow,
-                // Colors.red,
-                Colors.indigo,
-                Colors.purple,
-              ],
-            )),
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    // Colors.yellow,
+                    // Colors.red,
+                    Colors.indigo,
+                    Colors.purple,
+                  ],
+                )),
             child: SingleChildScrollView(
-                child: Padding(
-              padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  SizedBox(height: getProportionateScreenWidth(45)),
+                  SizedBox(height: getProportionateScreenWidth(60)),
                   Stack(
                     children: [
-                      // Padding(
-                      //   padding: EdgeInsets.all(12.0),
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("\n    Hello,",
-                            style: const TextStyle(color: Colors.black)),
-                      ),
-
-                      Text(
-                        'This is Google Fonts',
-                        style: GoogleFonts.stylish(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 50.0),
+                        child: Text(
+                          'Search your upcoming \nflight',
+                          style: GoogleFonts.hammersmithOne(
+                            textStyle: TextStyle(
+                              color: Colors.white,
                               letterSpacing: .5,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateScreenWidth(25),
+                            ),
+                          ),
                         ),
                       ),
                       // SizedBox(height: getProportionateScreenWidth(25)),
-                      const Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Align(
-                            alignment: Alignment.topRight,
-                            child: Icon(
-                              CupertinoIcons.bell,
-                              color: Colors.black,
-                            )),
-                      )
                     ],
                   ),
                   const Padding(
@@ -70,10 +56,14 @@ class HomeScreen extends StatelessWidget {
                     child: MyPrefilledSearch(),
                   ),
                   SizedBox(height: getProportionateScreenWidth(15)),
-                  //const areaOfInterestMain()
+                  CupertinoButton(
+                    color: Colors.indigo,
+                    onPressed: () {},
+                    child: const Text('Search'),
+                  ),
                 ],
               ),
-            ))));
+            )));
   }
 }
 
