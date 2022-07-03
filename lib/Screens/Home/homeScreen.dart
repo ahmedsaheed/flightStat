@@ -7,10 +7,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    final TextEditingController _textEditingController =
+        TextEditingController();
 
     return Scaffold(
         body: Container(
-            height: SizeConfig.screenHeight / 1.8,
+            height: SizeConfig.screenHeight / 1.5,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.zero,
@@ -48,13 +50,39 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // SizedBox(height: getProportionateScreenWidth(25)),
+                      SizedBox(height: getProportionateScreenWidth(35)),
                     ],
                   ),
                   const Padding(
                     padding: EdgeInsets.all(15.0),
                     child: MyPrefilledSearch(),
                   ),
+                  SizedBox(height: getProportionateScreenWidth(15)),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 50.0),
+                    child: Text(
+                      'Select Date:',
+                      style: GoogleFonts.hammersmithOne(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: .5,
+                          fontWeight: FontWeight.bold,
+                          fontSize: getProportionateScreenWidth(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: SizedBox(
+                        height: 200,
+                        child: CupertinoDatePicker(
+                          mode: CupertinoDatePickerMode.date,
+                          initialDateTime: DateTime.now(),
+                          onDateTimeChanged: (newValue) {},
+                          // print(newDateTime);
+                        ),
+                      )),
                   SizedBox(height: getProportionateScreenWidth(15)),
                   CupertinoButton(
                     color: Colors.indigo,
@@ -81,10 +109,57 @@ class _MyPrefilledSearchState extends State<MyPrefilledSearch> {
       onChanged: (String value) {
         print('The text has changed to: $value');
       },
-      placeholder: "Start to search your dream job...",
+      placeholder: "Enter flight number...",
       onSubmitted: (String value) {
         print('Submitted text: $value');
       },
     );
+  }
+}
+
+class MyDatePicker extends StatefulWidget {
+  const MyDatePicker({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _MyDatePickerState();
+}
+
+class _MyDatePickerState extends State<MyDatePicker> {
+  DateTime? selectedDate;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          child: Text("Show DatePicker"),
+          onPressed: () {
+            showDatePicker();
+          },
+        ),
+        Text(selectedDate == null ? "" : "$selectedDate")
+      ],
+    );
+  }
+
+  void showDatePicker() {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext builder) {
+          return SizedBox(
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: DateTime.now(),
+              onDateTimeChanged: (newValue) {
+                if (newValue != null && newValue != selectedDate) {
+                  setState(() {
+                    selectedDate = newValue;
+                  });
+                }
+              },
+            ),
+          );
+        });
   }
 }
