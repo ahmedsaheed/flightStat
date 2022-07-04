@@ -42,7 +42,7 @@ class _GetFlightState extends State<GetFlight> {
 
     return Scaffold(
         body: Container(
-      height: SizeConfig.screenHeight,
+      height: isLoaded ? SizeConfig.screenHeight / 2 : SizeConfig.screenHeight,
       width: SizeConfig.screenWidth,
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -58,7 +58,7 @@ class _GetFlightState extends State<GetFlight> {
       child: Center(
           child: isLoaded
               ? Text(
-                  "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure} \n Arrival: ${flight![0].arrival} \n Flight Number: ${flight![0].flightDate} \n Flight Status: ${flight![0].flightStatus}")
+                  "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata} \n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}")
               : const CupertinoActivityIndicator(
                   animating: true,
                   radius: 30,
