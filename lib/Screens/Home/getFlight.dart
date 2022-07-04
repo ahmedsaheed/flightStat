@@ -58,7 +58,7 @@ class _GetFlightState extends State<GetFlight> {
       child: Center(
           child: isLoaded
               ? Text(
-                  "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata} \n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}")
+                  "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata}\n Departure Time: ${flight![0].departure!.scheduled}(${flight![0].departure!.timezone})\n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\nArrival Time ${flight![0].arrival!.scheduled}(${flight![0].arrival!.timezone})\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}")
               : const CupertinoActivityIndicator(
                   animating: true,
                   radius: 30,
