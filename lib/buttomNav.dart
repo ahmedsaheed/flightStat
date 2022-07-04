@@ -14,8 +14,8 @@ class ButtomNav extends StatelessWidget {
         backgroundColor: CupertinoColors.systemGrey.withOpacity(0.5),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Home',
+            icon: Icon(CupertinoIcons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.building_2_fill),
