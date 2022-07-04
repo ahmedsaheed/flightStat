@@ -1,11 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job/Screens/Home/getFlight.dart';
 import '../../sizeConfig.dart';
+import '../../models/flightDetails.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -13,15 +15,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DateTime? selectedDate;
   bool isDateSet = false;
-  String? date;
-  String? flightNo;
+  String date = "";
+  String flightNo = "";
   bool isFlightSet = false;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final TextEditingController _textEditingController =
-        TextEditingController();
 
     return Scaffold(
         body: Container(
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(right: 0.0),
                     child: Text(
                       selectedDate == null
-                          ? "Select Date:"
+                          ? "Select Date: ${DateTime.now().toString().substring(0, 10)}"
                           : "Select Date: ${selectedDate.toString().substring(0, 10)}",
                       style: GoogleFonts.hammersmithOne(
                         textStyle: TextStyle(
@@ -130,7 +130,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(height: getProportionateScreenWidth(15)),
                   CupertinoButton(
                     color: Colors.indigo,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (isDateSet && isFlightSet) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GetFlight(
+                              flightNo: flightNo,
+                              date: date,
+                            ),
+                          ),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: Text("Error"),
+                            content: Text("Please enter all the fields"),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: Text("Ok"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
                     child: const Text('Search'),
                   ),
                 ],
