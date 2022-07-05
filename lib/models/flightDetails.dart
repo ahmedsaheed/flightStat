@@ -12,7 +12,6 @@ Future<Flight> fetchFlight(String flightNo, String date) async {
 
   try {
     if (response.statusCode == 200) {
-      print(response.body);
       return flightFromJson(response.body);
     } else {
       throw Exception('Failed to load flights');

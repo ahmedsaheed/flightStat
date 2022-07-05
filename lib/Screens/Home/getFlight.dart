@@ -17,6 +17,7 @@ class GetFlight extends StatefulWidget {
 class _GetFlightState extends State<GetFlight> {
   List<FlightData>? flight;
   bool isLoaded = false;
+  bool isFound = false;
 
   @override
   void initState() {
@@ -27,12 +28,24 @@ class _GetFlightState extends State<GetFlight> {
   retriveData() async {
     Flight mounted = await fetchFlight(widget.flightNo, widget.date);
     flight = mounted.data;
-
-    print("Actual Data :${flight![0].flightStatus}");
-    if (flight != null) {
+    if (flight != null && flight!.isNotEmpty) {
       setState(() {
         isLoaded = true;
+        isFound = true;
       });
+    }
+  }
+
+  whatToDo() {
+    if (isFound && isLoaded) {
+      return Text(
+          "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata}\n Departure Time: ${flight![0].departure!.scheduled}(${flight![0].departure!.timezone})\n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\nArrival Time ${flight![0].arrival!.scheduled}(${flight![0].arrival!.timezone})\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}");
+    } else if (!isFound && !isLoaded) {
+      return const CupertinoActivityIndicator(
+        animating: true,
+        radius: 30,
+        color: Colors.white,
+      );
     }
   }
 
@@ -42,28 +55,21 @@ class _GetFlightState extends State<GetFlight> {
 
     return Scaffold(
         body: Container(
-      height: isLoaded ? SizeConfig.screenHeight / 2 : SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          // Colors.yellow,
-          // Colors.red,
-          Colors.indigo,
-          Colors.purple,
-        ],
-      )),
-      child: Center(
-          child: isLoaded
-              ? Text(
-                  "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata}\n Departure Time: ${flight![0].departure!.scheduled}(${flight![0].departure!.timezone})\n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\nArrival Time ${flight![0].arrival!.scheduled}(${flight![0].arrival!.timezone})\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}")
-              : const CupertinoActivityIndicator(
-                  animating: true,
-                  radius: 30,
-                  color: Colors.white,
-                )),
-    ));
+            height: isLoaded && isFound
+                ? SizeConfig.screenHeight / 2
+                : SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                // Colors.yellow,
+                // Colors.red,
+                Colors.indigo,
+                Colors.purple,
+              ],
+            )),
+            child: whatToDo()));
   }
 }
