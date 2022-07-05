@@ -8,8 +8,9 @@ import 'package:http/http.dart' as http;
 
 Future<Flight> fetchFlight(String flightNo, String date) async {
   final response = await http.get(Uri.parse(
-      'http://api.aviationstack.com/v1/flights?access_key=3a3482cb4d3c99a3bb8e3076e71f7c10&flight_iata=$flightNo&date=$date'));
+      'http://api.aviationstack.com/v1/flights?access_key=3a3482cb4d3c99a3bb8e3076e71f7c10'));
 
+//http://api.aviationstack.com/v1/flights?access_key=3a3482cb4d3c99a3bb8e3076e71f7c10&flight_iata=$flightNo&date=$date
   try {
     if (response.statusCode == 200) {
       return flightFromJson(response.body);
@@ -27,12 +28,12 @@ String flightToJson(Flight data) => json.encode(data.toJson());
 
 class Flight {
   Flight({
-    required this.pagination,
-    required this.data,
+    this.pagination,
+    this.data,
   });
 
-  Pagination pagination;
-  List<FlightData> data;
+  Pagination? pagination;
+  List<FlightData>? data;
 
   factory Flight.fromJson(Map<String, dynamic> json) => Flight(
         pagination: Pagination.fromJson(json["pagination"]),
@@ -41,35 +42,35 @@ class Flight {
       );
 
   Map<String, dynamic> toJson() => {
-        "pagination": pagination.toJson(),
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "pagination": pagination!.toJson(),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
       };
 }
 
 class FlightData {
   FlightData({
-    required this.flightDate,
-    required this.flightStatus,
-    required this.departure,
-    required this.arrival,
-    required this.airline,
-    required this.flight,
-    required this.aircraft,
-    required this.live,
+    this.flightDate,
+    this.flightStatus,
+    this.departure,
+    this.arrival,
+    this.airline,
+    this.flight,
+    this.aircraft,
+    this.live,
   });
 
   DateTime? flightDate;
-  String? flightStatus;
+  FlightStatus? flightStatus;
   Arrival? departure;
   Arrival? arrival;
   Airline? airline;
   FlightClass? flight;
   Aircraft? aircraft;
-  dynamic live;
+  Live? live;
 
   factory FlightData.fromJson(Map<String, dynamic> json) => FlightData(
         flightDate: DateTime.parse(json["flight_date"]),
-        flightStatus: json["flight_status"],
+        flightStatus: flightStatusValues.map[json["flight_status"]],
         departure: Arrival.fromJson(json["departure"]),
         arrival: Arrival.fromJson(json["arrival"]),
         airline: Airline.fromJson(json["airline"]),
@@ -77,28 +78,28 @@ class FlightData {
         aircraft: json["aircraft"] == null
             ? null
             : Aircraft.fromJson(json["aircraft"]),
-        live: json["live"],
+        live: json["live"] == null ? null : Live.fromJson(json["live"]),
       );
 
   Map<String, dynamic> toJson() => {
         "flight_date":
             "${flightDate!.year.toString().padLeft(4, '0')}-${flightDate!.month.toString().padLeft(2, '0')}-${flightDate!.day.toString().padLeft(2, '0')}",
-        "flight_status": flightStatus,
+        "flight_status": flightStatusValues.reverse![flightStatus],
         "departure": departure!.toJson(),
         "arrival": arrival!.toJson(),
         "airline": airline!.toJson(),
         "flight": flight!.toJson(),
         "aircraft": aircraft == null ? null : aircraft!.toJson(),
-        "live": live,
+        "live": live == null ? null : live!.toJson(),
       };
 }
 
 class Aircraft {
   Aircraft({
-    required this.registration,
-    required this.iata,
-    required this.icao,
-    required this.icao24,
+    this.registration,
+    this.iata,
+    this.icao,
+    this.icao24,
   });
 
   String? registration;
@@ -123,9 +124,9 @@ class Aircraft {
 
 class Airline {
   Airline({
-    required this.name,
-    required this.iata,
-    required this.icao,
+    this.name,
+    this.iata,
+    this.icao,
   });
 
   String? name;
@@ -147,19 +148,19 @@ class Airline {
 
 class Arrival {
   Arrival({
-    required this.airport,
-    required this.timezone,
-    required this.iata,
-    required this.icao,
-    required this.terminal,
-    required this.gate,
-    required this.baggage,
-    required this.delay,
-    required this.scheduled,
-    required this.estimated,
+    this.airport,
+    this.timezone,
+    this.iata,
+    this.icao,
+    this.terminal,
+    this.gate,
+    this.baggage,
+    this.delay,
+    this.scheduled,
+    this.estimated,
     this.actual,
-    required this.estimatedRunway,
-    required this.actualRunway,
+    this.estimatedRunway,
+    this.actualRunway,
   });
 
   String? airport;
@@ -187,9 +188,7 @@ class Arrival {
         delay: json["delay"] == null ? null : json["delay"],
         scheduled: DateTime.parse(json["scheduled"]),
         estimated: DateTime.parse(json["estimated"]),
-        actual: json["actual"] == null
-            ? null
-            : DateTime.parse(json["actual"]) as DateTime,
+        actual: json["actual"] == null ? null : DateTime.parse(json["actual"]),
         estimatedRunway: json["estimated_runway"] == null
             ? null
             : DateTime.parse(json["estimated_runway"]),
@@ -219,38 +218,129 @@ class Arrival {
 
 class FlightClass {
   FlightClass({
-    required this.number,
-    required this.iata,
-    required this.icao,
-    required this.codeshared,
+    this.number,
+    this.iata,
+    this.icao,
+    this.codeshared,
   });
 
   String? number;
   String? iata;
   String? icao;
-  dynamic codeshared;
+  Codeshared? codeshared;
 
   factory FlightClass.fromJson(Map<String, dynamic> json) => FlightClass(
         number: json["number"],
         iata: json["iata"],
         icao: json["icao"],
-        codeshared: json["codeshared"],
+        codeshared: json["codeshared"] == null
+            ? null
+            : Codeshared.fromJson(json["codeshared"]),
       );
 
   Map<String, dynamic> toJson() => {
         "number": number,
         "iata": iata,
         "icao": icao,
-        "codeshared": codeshared,
+        "codeshared": codeshared == null ? null : codeshared!.toJson(),
+      };
+}
+
+class Codeshared {
+  Codeshared({
+    this.airlineName,
+    this.airlineIata,
+    this.airlineIcao,
+    this.flightNumber,
+    this.flightIata,
+    this.flightIcao,
+  });
+
+  String? airlineName;
+  String? airlineIata;
+  String? airlineIcao;
+  String? flightNumber;
+  String? flightIata;
+  String? flightIcao;
+
+  factory Codeshared.fromJson(Map<String, dynamic> json) => Codeshared(
+        airlineName: json["airline_name"],
+        airlineIata: json["airline_iata"],
+        airlineIcao: json["airline_icao"],
+        flightNumber: json["flight_number"],
+        flightIata: json["flight_iata"],
+        flightIcao: json["flight_icao"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "airline_name": airlineName,
+        "airline_iata": airlineIata,
+        "airline_icao": airlineIcao,
+        "flight_number": flightNumber,
+        "flight_iata": flightIata,
+        "flight_icao": flightIcao,
+      };
+}
+
+enum FlightStatus { SCHEDULED, CANCELLED, ACTIVE, LANDED }
+
+final flightStatusValues = EnumValues({
+  "active": FlightStatus.ACTIVE,
+  "cancelled": FlightStatus.CANCELLED,
+  "landed": FlightStatus.LANDED,
+  "scheduled": FlightStatus.SCHEDULED
+});
+
+class Live {
+  Live({
+    this.updated,
+    this.latitude,
+    this.longitude,
+    this.altitude,
+    this.direction,
+    this.speedHorizontal,
+    this.speedVertical,
+    this.isGround,
+  });
+
+  DateTime? updated;
+  double? latitude;
+  double? longitude;
+  double? altitude;
+  int? direction;
+  double? speedHorizontal;
+  int? speedVertical;
+  bool? isGround;
+
+  factory Live.fromJson(Map<String, dynamic> json) => Live(
+        updated: DateTime.parse(json["updated"]),
+        latitude: json["latitude"].toDouble(),
+        longitude: json["longitude"].toDouble(),
+        altitude: json["altitude"].toDouble(),
+        direction: json["direction"],
+        speedHorizontal: json["speed_horizontal"].toDouble(),
+        speedVertical: json["speed_vertical"],
+        isGround: json["is_ground"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "updated": updated!.toIso8601String(),
+        "latitude": latitude,
+        "longitude": longitude,
+        "altitude": altitude,
+        "direction": direction,
+        "speed_horizontal": speedHorizontal,
+        "speed_vertical": speedVertical,
+        "is_ground": isGround,
       };
 }
 
 class Pagination {
   Pagination({
-    required this.limit,
-    required this.offset,
-    required this.count,
-    required this.total,
+    this.limit,
+    this.offset,
+    this.count,
+    this.total,
   });
 
   int? limit;
@@ -271,4 +361,18 @@ class Pagination {
         "count": count,
         "total": total,
       };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String>? reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String>? get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:job/Screens/companies/companyPage.dart';
+import 'package:job/Screens/Map/map.dart';
 import 'Screens/Favourites/favPage.dart';
 import 'Screens/Home/homeScreen.dart';
 import 'Screens/Jobs/jobPage.dart';

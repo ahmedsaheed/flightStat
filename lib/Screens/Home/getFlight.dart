@@ -27,7 +27,7 @@ class _GetFlightState extends State<GetFlight> {
 
   retriveData() async {
     Flight mounted = await fetchFlight(widget.flightNo, widget.date);
-    flight = mounted.data;
+    flight = mounted.data?.where((i) => i.live != null).toList();
     if (flight != null && flight!.isNotEmpty) {
       setState(() {
         isLoaded = true;
@@ -45,10 +45,9 @@ class _GetFlightState extends State<GetFlight> {
           itemBuilder: (context, i) {
             return ListTile(
               title: Text(
-                "Airline Name: ${flight![i].airline!.name}",
+                "Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number} Lat: ${flight![i].live!.latitude} Long: ${flight![i].live!.longitude}",
                 style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w500,
-                ),
+                    fontWeight: FontWeight.w500, color: Colors.white),
               ),
             );
           });
