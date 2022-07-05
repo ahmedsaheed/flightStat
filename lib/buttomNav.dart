@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:job/Screens/companies/companyPage.dart';
 import 'Screens/Favourites/favPage.dart';
 import 'Screens/Home/homeScreen.dart';
 import 'Screens/Jobs/jobPage.dart';
 import 'Screens/Profile/profilePage.dart';
-import 'Screens/companies/CompanyPage.dart';
 
 class ButtomNav extends StatelessWidget {
   const ButtomNav();
@@ -45,7 +45,7 @@ class ButtomNav extends StatelessWidget {
             break;
           case 1:
             return CupertinoTabView(
-              builder: (BuildContext context) => CompanyPage(),
+              builder: (BuildContext context) => const Mappers(),
             );
             break;
           case 2:

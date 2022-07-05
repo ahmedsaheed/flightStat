@@ -36,10 +36,22 @@ class _GetFlightState extends State<GetFlight> {
     }
   }
 
+  //"Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata}\n Departure Time: ${flight![0].departure!.scheduled}(${flight![0].departure!.timezone})\n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\nArrival Time ${flight![0].arrival!.scheduled}(${flight![0].arrival!.timezone})\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}"),
+
   whatToDo() {
     if (isFound && isLoaded) {
-      return Text(
-          "Airline Name: ${flight![0].airline!.name} \n Departure: ${flight![0].departure!.iata}\n Departure Time: ${flight![0].departure!.scheduled}(${flight![0].departure!.timezone})\n Departure Terminal:${flight![0].departure!.terminal} \n Departure Gate:${flight![0].departure!.gate} \n Arrival: ${flight![0].arrival!.iata} \n Arrival Terminal:${flight![0].arrival!.terminal}\nArrival Time ${flight![0].arrival!.scheduled}(${flight![0].arrival!.timezone})\n Arrival Gate:${flight![0].arrival!.gate} \n Flight Number: ${flight![0].flight!.number} \n Flight Status: ${flight![0].flightStatus}");
+      return ListView.builder(
+          itemCount: flight!.length,
+          itemBuilder: (context, i) {
+            return ListTile(
+              title: Text(
+                "Airline Name: ${flight![i].airline!.name}",
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            );
+          });
     } else if (!isFound && !isLoaded) {
       return const CupertinoActivityIndicator(
         animating: true,
@@ -54,10 +66,9 @@ class _GetFlightState extends State<GetFlight> {
     SizeConfig.init(context);
 
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 249, 240, 240),
         body: Container(
-            height: isLoaded && isFound
-                ? SizeConfig.screenHeight / 2
-                : SizeConfig.screenHeight,
+            height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
