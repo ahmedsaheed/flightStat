@@ -27,7 +27,8 @@ class _GetFlightState extends State<GetFlight> {
 
   retriveData() async {
     Flight mounted = await fetchFlight(widget.flightNo, widget.date);
-    flight = mounted.data?.where((i) => i.live != null).toList();
+    flight = mounted.data;
+    //FOR LIVE DATA:  mounted.data?.where((i) => i.live != null).toList();
     if (flight != null && flight!.isNotEmpty) {
       setState(() {
         isLoaded = true;
@@ -40,17 +41,33 @@ class _GetFlightState extends State<GetFlight> {
 
   whatToDo() {
     if (isFound && isLoaded) {
-      return ListView.builder(
-          itemCount: flight!.length,
-          itemBuilder: (context, i) {
-            return ListTile(
-              title: Text(
-                "Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number} Lat: ${flight![i].live!.latitude} Long: ${flight![i].live!.longitude}",
-                style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.w500, color: Colors.white),
-              ),
-            );
-          });
+      return SafeArea(
+          child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              // Colors.yellow,
+              // Colors.red,
+              Colors.indigo,
+              Colors.purple,
+            ],
+          )),
+          child: ListView.builder(
+              itemCount: flight!.length,
+              itemBuilder: (context, i) {
+                return ListTile(
+                  title: Text(
+                    "Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number}\nArrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nArrival Terminal:${flight![i].arrival!.terminal}\nArrival Gate:${flight![i].arrival!.gate}\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nDeparture Terminal:${flight![i].departure!.terminal}\nDeparture Gate:${flight![i].departure!.gate}\nFlight Status: ${flight![i].flightStatus}",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500, color: Colors.white),
+                  ),
+                );
+              }),
+        ),
+      ));
     } else if (!isFound && !isLoaded) {
       return const CupertinoActivityIndicator(
         animating: true,
@@ -64,9 +81,14 @@ class _GetFlightState extends State<GetFlight> {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    return Scaffold(
+    return CupertinoPageScaffold(
         backgroundColor: Color.fromARGB(255, 249, 240, 240),
-        body: Container(
+        navigationBar: CupertinoNavigationBar(
+          // Try removing opacity to observe the lack of a blur effect and of sliding content.
+          backgroundColor: CupertinoColors.systemGrey.withOpacity(0.5),
+          middle: const Text('Flight Details'),
+        ),
+        child: Container(
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
             decoration: const BoxDecoration(
