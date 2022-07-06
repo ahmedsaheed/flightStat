@@ -43,30 +43,17 @@ class _GetFlightState extends State<GetFlight> {
     if (isFound && isLoaded) {
       return SafeArea(
           child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              // Colors.yellow,
-              // Colors.red,
-              Colors.indigo,
-              Colors.purple,
-            ],
-          )),
-          child: ListView.builder(
-              itemCount: flight!.length,
-              itemBuilder: (context, i) {
-                return ListTile(
+        body: ListView.builder(
+            itemCount: flight!.length,
+            itemBuilder: (context, i) {
+              return ListTile(
                   title: Text(
                     "Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number}\nArrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nArrival Terminal:${flight![i].arrival!.terminal}\nArrival Gate:${flight![i].arrival!.gate}\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nDeparture Terminal:${flight![i].departure!.terminal}\nDeparture Gate:${flight![i].departure!.gate}\nFlight Status: ${flight![i].flightStatus}",
                     style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w500, color: Colors.white),
+                        fontWeight: FontWeight.w500, color: Colors.black),
                   ),
-                );
-              }),
-        ),
+                  subtitle: const Divider(color: Colors.black));
+            }),
       ));
     } else if (!isFound && !isLoaded) {
       return const CupertinoActivityIndicator(
@@ -83,25 +70,41 @@ class _GetFlightState extends State<GetFlight> {
 
     return CupertinoPageScaffold(
         backgroundColor: Color.fromARGB(255, 249, 240, 240),
-        navigationBar: CupertinoNavigationBar(
-          // Try removing opacity to observe the lack of a blur effect and of sliding content.
-          backgroundColor: CupertinoColors.systemGrey.withOpacity(0.5),
-          middle: const Text('Flight Details'),
-        ),
-        child: Container(
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                // Colors.yellow,
-                // Colors.red,
-                Colors.indigo,
-                Colors.purple,
-              ],
-            )),
-            child: whatToDo()));
+        child: SingleChildScrollView(
+            child: Stack(
+          children: <Widget>[
+            Container(
+                height: SizeConfig.screenHeight / 4.5,
+                width: SizeConfig.screenWidth,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    // Colors.yellow,
+                    // Colors.red,
+                    Colors.indigo,
+                    Colors.purple,
+                  ],
+                )),
+                child: Center(
+                  child: Text(
+                    "Flight Details",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500, color: Colors.white),
+                  ),
+                )),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: SizeConfig.screenHeight / 5.9, left: 8, right: 8),
+              child: Container(
+                color: Colors.transparent,
+                height: SizeConfig.screenHeight,
+                width: SizeConfig.screenWidth,
+                child: whatToDo(),
+              ),
+            )
+          ],
+        )));
   }
 }
