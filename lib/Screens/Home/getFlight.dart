@@ -347,15 +347,13 @@ class _GetFlightState extends State<GetFlight> {
                   Colors.purple,
                 ],
               )),
-              child: Center(
-                  child: Padding(
-                padding: EdgeInsets.only(top: SizeConfig.screenHeight / 2),
-                child: const CupertinoActivityIndicator(
+              child: const Center(
+                child: CupertinoActivityIndicator(
                   animating: true,
                   radius: 30,
                   color: Colors.white,
                 ),
-              ))),
+              )),
     );
   }
 }
