@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 Future<Flight> fetchFlight(String flightNo, String date) async {
   final response = await http.get(Uri.parse(
-      'http://api.aviationstack.com/v1/flights?access_key=3a3482cb4d3c99a3bb8e3076e71f7c10'));
+      'http://api.aviationstack.com/v1/flights?access_key=f524a0eb3dee967372fbdbe7bbcbeb47'));
 
 //http://api.aviationstack.com/v1/flights?access_key=3a3482cb4d3c99a3bb8e3076e71f7c10&flight_iata=$flightNo&date=$date
   try {

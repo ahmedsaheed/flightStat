@@ -56,7 +56,6 @@ class _GetFlightState extends State<GetFlight> {
                       color: Colors.white,
                     ),
                     padding: EdgeInsets.all(15),
-                    // margin: EdgeInsets.all(20),
                     child: Stack(
                       children: <Widget>[
                         Column(
@@ -160,11 +159,16 @@ class _GetFlightState extends State<GetFlight> {
                                 ),
                                 Expanded(
                                   flex: 3,
-                                  child: Container(
-                                      color: Colors.grey,
+                                  child: SizedBox(
                                       width: SizeConfig.screenWidth / 1.2,
                                       height: SizeConfig.screenWidth / 20.5,
-                                      child: Text("")),
+                                      child: Text("Flight Info",
+                                          style: GoogleFonts.hammersmithOne(
+                                            fontSize:
+                                                SizeConfig.screenWidth / 25,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.purple,
+                                          ))),
                                 ),
                                 const SizedBox(
                                   width: 10,
