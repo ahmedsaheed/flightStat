@@ -71,7 +71,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                         color: Colors.transparent,
                                         width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 4.5,
+                                        height: SizeConfig.screenWidth / 6.5,
                                         child: Column(
                                           children: <Widget>[
                                             Text(
@@ -87,7 +87,7 @@ class _GetFlightState extends State<GetFlight> {
                                               " ${flight![i].departure!.scheduled.toString().substring(11, 16)}",
                                               style: GoogleFonts.hammersmithOne(
                                                 fontSize:
-                                                    SizeConfig.screenWidth / 22,
+                                                    SizeConfig.screenWidth / 25,
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.purple,
                                               ),
@@ -103,7 +103,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                       color: Colors.grey,
                                       width: SizeConfig.screenWidth / 10,
-                                      height: SizeConfig.screenWidth / 4.5,
+                                      height: SizeConfig.screenWidth / 6.5,
                                     ),
                                   ),
                                   const SizedBox(
@@ -115,7 +115,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                         color: Colors.transparent,
                                         width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 4.5,
+                                        height: SizeConfig.screenWidth / 6.5,
                                         child: Column(
                                           children: <Widget>[
                                             Text("${flight![i].arrival!.iata}",
@@ -130,7 +130,7 @@ class _GetFlightState extends State<GetFlight> {
                                               " ${flight![i].arrival!.scheduled.toString().substring(11, 16)}",
                                               style: GoogleFonts.hammersmithOne(
                                                 fontSize:
-                                                    SizeConfig.screenWidth / 22,
+                                                    SizeConfig.screenWidth / 25,
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.purple,
                                               ),
@@ -141,15 +141,49 @@ class _GetFlightState extends State<GetFlight> {
                                 ],
                               ),
                             ),
+                            const Divider(
+                              color: Colors.grey,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Flexible(
+                                  flex: 1,
+                                  fit: FlexFit.loose,
+                                  child: Container(
+                                      color: Colors.grey,
+                                      width: SizeConfig.screenWidth / 1.2,
+                                      height: SizeConfig.screenWidth / 20.5,
+                                      child: Text("")),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                      color: Colors.grey,
+                                      width: SizeConfig.screenWidth / 1.2,
+                                      height: SizeConfig.screenWidth / 20.5,
+                                      child: Text("")),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  fit: FlexFit.loose,
+                                  child: Container(
+                                      color: Colors.grey,
+                                      width: SizeConfig.screenWidth / 1.2,
+                                      height: SizeConfig.screenWidth / 20.5,
+                                      child: Text("")),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ],
                     )),
-
-                //   Text(
-                //       "Arrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nFlight Status: ${flight![i].flightStatus}",
-                //       style: TextStyle(fontSize: 25)),
-                // ),
               );
             }),
       ));
