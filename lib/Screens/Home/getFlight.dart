@@ -55,12 +55,6 @@ class _GetFlightState extends State<GetFlight> {
                   subtitle: const Divider(color: Colors.black));
             }),
       ));
-    } else if (!isFound && !isLoaded) {
-      return const CupertinoActivityIndicator(
-        animating: true,
-        radius: 30,
-        color: Colors.white,
-      );
     }
   }
 
@@ -96,16 +90,25 @@ class _GetFlightState extends State<GetFlight> {
                         fontWeight: FontWeight.w500, color: Colors.white),
                   ),
                 )),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: SizeConfig.screenHeight / 5.9, left: 8, right: 8),
-              child: Container(
-                color: Colors.transparent,
-                height: SizeConfig.screenHeight,
-                width: SizeConfig.screenWidth,
-                child: whatToDo(),
-              ),
-            )
+            isLoaded
+                ? Padding(
+                    padding: EdgeInsets.only(
+                        top: SizeConfig.screenHeight / 5.9, left: 8, right: 8),
+                    child: Container(
+                      color: Colors.transparent,
+                      height: SizeConfig.screenHeight,
+                      width: SizeConfig.screenWidth,
+                      child: whatToDo(),
+                    ))
+                : Center(
+                    child: Padding(
+                    padding: EdgeInsets.only(top: SizeConfig.screenHeight / 2),
+                    child: const CupertinoActivityIndicator(
+                      animating: true,
+                      radius: 30,
+                      color: Colors.white,
+                    ),
+                  ))
           ],
         )));
   }
