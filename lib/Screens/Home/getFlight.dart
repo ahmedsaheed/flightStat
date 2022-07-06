@@ -234,7 +234,7 @@ class _GetFlightState extends State<GetFlight> {
                                             style: GoogleFonts.hammersmithOne(
                                               fontSize:
                                                   SizeConfig.screenWidth / 29,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.grey,
                                             )),
                                       ))),
@@ -248,14 +248,36 @@ class _GetFlightState extends State<GetFlight> {
                                   child: Container(
                                       width: SizeConfig.screenWidth / 1.2,
                                       height: SizeConfig.screenWidth / 20.5,
-                                      child: Text(
-                                          "${timeDiff(flight![i].departure!.scheduled, flight![i].arrival!.scheduled)}",
-                                          style: GoogleFonts.hammersmithOne(
-                                            fontSize:
-                                                SizeConfig.screenWidth / 29,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.grey,
-                                          ))),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            const WidgetSpan(
+                                              child: Icon(CupertinoIcons.clock,
+                                                  size: 12, color: Colors.grey),
+                                            ),
+                                            TextSpan(
+                                                text:
+                                                    "${timeDiff(flight![i].departure!.scheduled, flight![i].arrival!.scheduled)}",
+                                                style:
+                                                    GoogleFonts.hammersmithOne(
+                                                  fontSize:
+                                                      SizeConfig.screenWidth /
+                                                          35,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey,
+                                                )),
+                                          ],
+                                        ),
+                                      )),
+
+// Text(
+//                                           "${timeDiff(flight![i].departure!.scheduled, flight![i].arrival!.scheduled)}",
+//                                           style: GoogleFonts.hammersmithOne(
+//                                             fontSize:
+//                                                 SizeConfig.screenWidth / 29,
+//                                             fontWeight: FontWeight.w500,
+//                                             color: Colors.grey,
+//                                           ))
                                 ),
                               ],
                             )
