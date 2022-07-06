@@ -111,8 +111,7 @@ class _GetFlightState extends State<GetFlight> {
                                         height: SizeConfig.screenWidth / 4.5,
                                         child: Column(
                                           children: <Widget>[
-                                            Text(
-                                                "${flight![i].departure!.iata}",
+                                            Text("${flight![i].arrival!.iata}",
                                                 style: GoogleFonts.stylish(
                                                   fontSize:
                                                       SizeConfig.screenWidth /
@@ -121,7 +120,7 @@ class _GetFlightState extends State<GetFlight> {
                                                   color: Colors.grey,
                                                 )),
                                             Text(
-                                                " ${flight![i].departure!.scheduled.toString().substring(11, 16)}"),
+                                                " ${flight![i].arrival!.scheduled.toString().substring(11, 16)}"),
                                           ],
                                         )),
                                   ),
