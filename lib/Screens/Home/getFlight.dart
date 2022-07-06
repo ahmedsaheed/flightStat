@@ -241,35 +241,33 @@ class _GetFlightState extends State<GetFlight> {
     SizeConfig.init(context);
 
     return CupertinoPageScaffold(
-        backgroundColor: Color.fromARGB(255, 230, 241, 241),
-        child: SingleChildScrollView(
-            child: Stack(
-          children: <Widget>[
-            Container(
-                height: isLoaded
-                    ? SizeConfig.screenHeight / 4.5
-                    : SizeConfig.screenHeight,
-                width: SizeConfig.screenWidth,
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    // Colors.yellow,
-                    // Colors.red,
-                    Colors.indigo,
-                    Colors.purple,
-                  ],
-                )),
-                child: Center(
-                  child: Text(
-                    isLoaded ? "Flight Details" : "",
-                    style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w500, color: Colors.white),
-                  ),
-                )),
-            isLoaded
-                ? Padding(
+      backgroundColor: Color.fromARGB(255, 230, 241, 241),
+      child: isLoaded
+          ? SingleChildScrollView(
+              child: Stack(
+              children: <Widget>[
+                Container(
+                    height: SizeConfig.screenHeight / 4.5,
+                    width: SizeConfig.screenWidth,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        // Colors.yellow,
+                        // Colors.red,
+                        Colors.indigo,
+                        Colors.purple,
+                      ],
+                    )),
+                    child: Center(
+                      child: Text(
+                        "Flight Details",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w500, color: Colors.white),
+                      ),
+                    )),
+                Padding(
                     padding: EdgeInsets.only(
                         top: SizeConfig.screenHeight / 5.9, left: 8, right: 8),
                     child: Container(
@@ -278,16 +276,31 @@ class _GetFlightState extends State<GetFlight> {
                       width: SizeConfig.screenWidth,
                       child: whatToDo(),
                     ))
-                : Center(
-                    child: Padding(
-                    padding: EdgeInsets.only(top: SizeConfig.screenHeight / 2),
-                    child: const CupertinoActivityIndicator(
-                      animating: true,
-                      radius: 30,
-                      color: Colors.white,
-                    ),
-                  ))
-          ],
-        )));
+              ],
+            ))
+          : Container(
+              height: SizeConfig.screenHeight,
+              width: SizeConfig.screenWidth,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  // Colors.yellow,
+                  // Colors.red,
+                  Colors.indigo,
+                  Colors.purple,
+                ],
+              )),
+              child: Center(
+                  child: Padding(
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight / 2),
+                child: const CupertinoActivityIndicator(
+                  animating: true,
+                  radius: 30,
+                  color: Colors.white,
+                ),
+              ))),
+    );
   }
 }
