@@ -84,7 +84,14 @@ class _GetFlightState extends State<GetFlight> {
                                                   color: Colors.grey,
                                                 )),
                                             Text(
-                                                " ${flight![i].departure!.scheduled.toString().substring(11, 16)}"),
+                                              " ${flight![i].departure!.scheduled.toString().substring(11, 16)}",
+                                              style: GoogleFonts.hammersmithOne(
+                                                fontSize:
+                                                    SizeConfig.screenWidth / 22,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.purple,
+                                              ),
+                                            ),
                                           ],
                                         )),
                                   ),
@@ -120,7 +127,14 @@ class _GetFlightState extends State<GetFlight> {
                                                   color: Colors.grey,
                                                 )),
                                             Text(
-                                                " ${flight![i].arrival!.scheduled.toString().substring(11, 16)}"),
+                                              " ${flight![i].arrival!.scheduled.toString().substring(11, 16)}",
+                                              style: GoogleFonts.hammersmithOne(
+                                                fontSize:
+                                                    SizeConfig.screenWidth / 22,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.purple,
+                                              ),
+                                            ),
                                           ],
                                         )),
                                   ),
