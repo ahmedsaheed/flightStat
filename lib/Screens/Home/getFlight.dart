@@ -74,7 +74,9 @@ class _GetFlightState extends State<GetFlight> {
             child: Stack(
           children: <Widget>[
             Container(
-                height: SizeConfig.screenHeight / 4.5,
+                height: isLoaded
+                    ? SizeConfig.screenHeight / 4.5
+                    : SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -89,7 +91,7 @@ class _GetFlightState extends State<GetFlight> {
                 )),
                 child: Center(
                   child: Text(
-                    "Flight Details",
+                    isLoaded ? "Flight Details" : "",
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w500, color: Colors.white),
                   ),
