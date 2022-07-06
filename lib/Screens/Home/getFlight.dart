@@ -114,10 +114,43 @@ class _GetFlightState extends State<GetFlight> {
                                   Expanded(
                                     flex: 3,
                                     child: Container(
-                                      color: Colors.grey,
-                                      width: SizeConfig.screenWidth / 10,
-                                      height: SizeConfig.screenWidth / 6.92,
-                                    ),
+                                        color: Colors.transparent,
+                                        width: SizeConfig.screenWidth / 10,
+                                        height: SizeConfig.screenWidth / 6.92,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Flexible(
+                                                    fit: FlexFit.tight,
+                                                    flex: 1,
+                                                    child: Container(
+                                                        child: const Text(
+                                                            "----------"))),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Flexible(
+                                                    fit: FlexFit.tight,
+                                                    flex: 1,
+                                                    child: Container(
+                                                        child: const Icon(
+                                                      CupertinoIcons.airplane,
+                                                      color: Colors.indigo,
+                                                    ))),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Flexible(
+                                                    fit: FlexFit.tight,
+                                                    flex: 1,
+                                                    child: Container(
+                                                        child: const Text(
+                                                            "----------"))),
+                                              ],
+                                            )
+                                          ],
+                                        )),
                                   ),
                                   const SizedBox(
                                     width: 10,
