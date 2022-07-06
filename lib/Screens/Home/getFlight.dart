@@ -43,7 +43,11 @@ class _GetFlightState extends State<GetFlight> {
     Random random = new Random();
     int randomNumber = random.nextInt(60) + 10;
 
-    return arrival!.difference(departure!).inHours.toString() +
+    if (arrival!.difference(departure!).inHours < 1) {
+      return arrival.difference(departure).inMinutes.toString() + "min";
+    }
+
+    return arrival.difference(departure).inHours.toString() +
         "h " +
         randomNumber.toString() +
         "m";
