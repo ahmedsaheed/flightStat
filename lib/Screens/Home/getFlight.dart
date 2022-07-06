@@ -38,6 +38,12 @@ class _GetFlightState extends State<GetFlight> {
   }
 
 //"Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number}\nArrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nArrival Terminal:${flight![i].arrival!.terminal}\nArrival Gate:${flight![i].arrival!.gate}\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nDeparture Terminal:${flight![i].departure!.terminal}\nDeparture Gate:${flight![i].departure!.gate}\nFlight Status: ${flight![i].flightStatus}",
+  timeDiff(DateTime? departure, DateTime? arrival) {
+    return arrival!.difference(departure!).inHours.toString() +
+        "h " +
+        arrival.difference(departure).inMinutes.toString() +
+        "m";
+  }
 
   whatToDo() {
     if (isFound && isLoaded) {
@@ -70,7 +76,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                         color: Colors.transparent,
                                         width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 6.5,
+                                        height: SizeConfig.screenWidth / 6.92,
                                         child: Column(
                                           children: <Widget>[
                                             Text(
@@ -88,7 +94,7 @@ class _GetFlightState extends State<GetFlight> {
                                                 fontSize:
                                                     SizeConfig.screenWidth / 25,
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.purple,
+                                                color: Colors.indigo,
                                               ),
                                             ),
                                           ],
@@ -102,7 +108,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                       color: Colors.grey,
                                       width: SizeConfig.screenWidth / 10,
-                                      height: SizeConfig.screenWidth / 6.5,
+                                      height: SizeConfig.screenWidth / 6.92,
                                     ),
                                   ),
                                   const SizedBox(
@@ -114,7 +120,7 @@ class _GetFlightState extends State<GetFlight> {
                                     child: Container(
                                         color: Colors.transparent,
                                         width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 6.5,
+                                        height: SizeConfig.screenWidth / 6.92,
                                         child: Column(
                                           children: <Widget>[
                                             Text("${flight![i].arrival!.iata}",
@@ -131,7 +137,7 @@ class _GetFlightState extends State<GetFlight> {
                                                 fontSize:
                                                     SizeConfig.screenWidth / 25,
                                                 fontWeight: FontWeight.w500,
-                                                color: Colors.purple,
+                                                color: Colors.indigo,
                                               ),
                                             ),
                                           ],
@@ -149,26 +155,48 @@ class _GetFlightState extends State<GetFlight> {
                                   flex: 1,
                                   fit: FlexFit.loose,
                                   child: Container(
-                                      color: Colors.grey,
+                                      color: Colors.transparent,
                                       width: SizeConfig.screenWidth / 1.2,
                                       height: SizeConfig.screenWidth / 20.5,
-                                      child: Text("")),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 12.0,
+                                        ),
+                                        child: Text(
+                                            "${flight![i].flight!.iata}",
+                                            style: GoogleFonts.stylish(
+                                              fontSize:
+                                                  SizeConfig.screenWidth / 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey,
+                                            )),
+                                      )),
                                 ),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
                                   flex: 3,
-                                  child: SizedBox(
+                                  child: Container(
+                                      color: Colors.transparent,
                                       width: SizeConfig.screenWidth / 1.2,
-                                      height: SizeConfig.screenWidth / 20.5,
-                                      child: Text("Flight Info",
-                                          style: GoogleFonts.hammersmithOne(
-                                            fontSize:
-                                                SizeConfig.screenWidth / 25,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.purple,
-                                          ))),
+                                      height: SizeConfig.screenWidth / 11.1,
+                                      child: Center(
+                                          child: TextButton.icon(
+                                        icon: const Icon(CupertinoIcons.info,
+                                            size: 15),
+                                        onPressed: () {},
+                                        style: TextButton.styleFrom(
+                                          primary: Colors.grey, // Text Color
+                                        ),
+                                        label: Text('Flight Info',
+                                            style: GoogleFonts.hammersmithOne(
+                                              fontSize:
+                                                  SizeConfig.screenWidth / 29,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.grey,
+                                            )),
+                                      ))),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -177,10 +205,16 @@ class _GetFlightState extends State<GetFlight> {
                                   flex: 1,
                                   fit: FlexFit.loose,
                                   child: Container(
-                                      color: Colors.grey,
                                       width: SizeConfig.screenWidth / 1.2,
                                       height: SizeConfig.screenWidth / 20.5,
-                                      child: Text("")),
+                                      child: Text(
+                                          "${timeDiff(flight![i].departure!.scheduled, flight![i].arrival!.scheduled)}",
+                                          style: GoogleFonts.hammersmithOne(
+                                            fontSize:
+                                                SizeConfig.screenWidth / 29,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.grey,
+                                          ))),
                                 ),
                               ],
                             )
