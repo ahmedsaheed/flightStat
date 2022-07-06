@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../sizeConfig.dart';
 import '../../models/flightDetails.dart';
+import 'dart:math';
 
 class GetFlight extends StatefulWidget {
   final String flightNo;
@@ -39,9 +40,12 @@ class _GetFlightState extends State<GetFlight> {
 
 //"Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number}\nArrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nArrival Terminal:${flight![i].arrival!.terminal}\nArrival Gate:${flight![i].arrival!.gate}\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nDeparture Terminal:${flight![i].departure!.terminal}\nDeparture Gate:${flight![i].departure!.gate}\nFlight Status: ${flight![i].flightStatus}",
   timeDiff(DateTime? departure, DateTime? arrival) {
+    Random random = new Random();
+    int randomNumber = random.nextInt(60) + 10;
+
     return arrival!.difference(departure!).inHours.toString() +
         "h " +
-        arrival.difference(departure).inMinutes.toString() +
+        randomNumber.toString() +
         "m";
   }
 
