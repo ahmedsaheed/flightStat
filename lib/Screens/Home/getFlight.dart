@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../sizeConfig.dart';
 import '../../models/flightDetails.dart';
 import 'dart:math';
+import 'Detailed.dart';
 
 class GetFlight extends StatefulWidget {
   final String flightNo;
@@ -69,7 +70,7 @@ class _GetFlightState extends State<GetFlight> {
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.white,
                     ),
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Stack(
                       children: <Widget>[
                         Column(
@@ -226,7 +227,40 @@ class _GetFlightState extends State<GetFlight> {
                                           child: TextButton.icon(
                                         icon: const Icon(CupertinoIcons.info,
                                             size: 15),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      flightDetails(
+                                                        flightIATA: flight![i]
+                                                            .flight!
+                                                            .iata
+                                                            .toString(),
+                                                        // flightNo: flight![i]
+                                                        //     .aircraft
+                                                        //     ?.icao
+                                                        //     .toString(),
+                                                        flightDate: flight![i]
+                                                            .departure!
+                                                            .scheduled
+                                                            .toString()
+                                                            .substring(0, 10),
+                                                        flightStatus: flight![i]
+                                                            .flightStatus
+                                                            .toString()
+                                                            .substring(13),
+                                                        departureCity:
+                                                            flight![i]
+                                                                .departure!
+                                                                .airport
+                                                                .toString(),
+                                                        arrivalCity: flight![i]
+                                                            .arrival!
+                                                            .airport
+                                                            .toString(),
+                                                      )));
+                                        },
                                         style: TextButton.styleFrom(
                                           primary: Colors.grey, // Text Color
                                         ),
@@ -269,15 +303,6 @@ class _GetFlightState extends State<GetFlight> {
                                           ],
                                         ),
                                       )),
-
-// Text(
-//                                           "${timeDiff(flight![i].departure!.scheduled, flight![i].arrival!.scheduled)}",
-//                                           style: GoogleFonts.hammersmithOne(
-//                                             fontSize:
-//                                                 SizeConfig.screenWidth / 29,
-//                                             fontWeight: FontWeight.w500,
-//                                             color: Colors.grey,
-//                                           ))
                                 ),
                               ],
                             )
