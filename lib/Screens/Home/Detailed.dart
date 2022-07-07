@@ -50,21 +50,6 @@ class _flightDetailsState extends State<flightDetails> {
     super.initState();
   }
 
-// Text(
-//                   widget.flightIATA.toString() +
-//                       "\n" +
-//                       widget.flightDate.toString() +
-//                       "\n" +
-//                       widget.flightStatus.toString() +
-//                       "\n" +
-//                       widget.departureCity.toString() +
-//                       "\n" +
-//                       widget.arrivalCity.toString() +
-//                       "\n" +
-//                       widget.airline.toString(),
-//                   style: GoogleFonts.roboto(
-//                       fontWeight: FontWeight.w500, color: Colors.white),
-//                 ),
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
