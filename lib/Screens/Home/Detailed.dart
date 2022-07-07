@@ -90,111 +90,142 @@ class _flightDetailsState extends State<flightDetails> {
               child: Padding(
                   padding: const EdgeInsets.only(left: 10.0, top: 20),
                   child: Stack(children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: getProportionateScreenHeight(50)),
-                        Text(
-                          "Flight ${widget.flightIATA.toString()}",
-                          style: GoogleFonts.hammersmithOne(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              letterSpacing: .5,
-                              fontWeight: FontWeight.bold,
-                              fontSize: getProportionateScreenWidth(30),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(height: getProportionateScreenHeight(50)),
+                          Text(
+                            "Flight ${widget.flightIATA.toString()}",
+                            style: GoogleFonts.hammersmithOne(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: .5,
+                                fontWeight: FontWeight.bold,
+                                fontSize: getProportionateScreenWidth(30),
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          "Departure: ${widget.departureCity.toString()[0].toUpperCase()}${widget.departureCity.toString().substring(1)}",
-                          style: GoogleFonts.stylish(
-                              fontWeight: FontWeight.w500, color: Colors.white),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          "Arrival: ${widget.arrivalCity.toString()[0].toUpperCase()}${widget.arrivalCity.toString().substring(1)}",
-                          style: GoogleFonts.stylish(
-                              fontWeight: FontWeight.w500, color: Colors.white),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          "Status: Flight ${widget.flightStatus.toString()[0].toUpperCase()}${widget.flightStatus.toString().substring(1).toLowerCase()}",
-                          style: GoogleFonts.stylish(
-                              fontWeight: FontWeight.w500, color: Colors.white),
-                        ),
-                        Text(
-                          "Airline: ${widget.airline.toString()[0].toUpperCase()}${widget.airline.toString().substring(1)}",
-                          style: GoogleFonts.stylish(
-                              fontWeight: FontWeight.w500, color: Colors.white),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          "Date: ${widget.flightDate.toString()}",
-                          style: GoogleFonts.stylish(
-                              fontWeight: FontWeight.w500, color: Colors.white),
-                          textAlign: TextAlign.left,
-                        ),
-                        SizedBox(height: getProportionateScreenHeight(5)),
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Container(
-                              height: SizeConfig.screenHeight / 7,
-                              color: Colors.transparent,
-                              child: Row(
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    fit: FlexFit.loose,
-                                    child: Container(
-                                        width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 4.5,
-                                        color: Colors.transparent,
-                                        child: Column(children: <Widget>[
-                                          Text(widget.departureIATA.toString(),
-                                              style: GoogleFonts.hammersmithOne(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize:
-                                                      getProportionateScreenWidth(
-                                                          22),
-                                                  color: Colors.white)),
-                                        ])),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    fit: FlexFit.loose,
-                                    child: Container(
-                                      width: SizeConfig.screenWidth / 1.2,
-                                      height: SizeConfig.screenWidth / 4.5,
-                                      color: Colors.transparent,
+                          Text(
+                            "Departure: ${widget.departureCity.toString()[0].toUpperCase()}${widget.departureCity.toString().substring(1)}",
+                            style: GoogleFonts.stylish(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            "Arrival: ${widget.arrivalCity.toString()[0].toUpperCase()}${widget.arrivalCity.toString().substring(1)}",
+                            style: GoogleFonts.stylish(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            "Status: Flight ${widget.flightStatus.toString()[0].toUpperCase()}${widget.flightStatus.toString().substring(1).toLowerCase()}",
+                            style: GoogleFonts.stylish(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "Airline: ${widget.airline.toString()[0].toUpperCase()}${widget.airline.toString().substring(1)}",
+                            style: GoogleFonts.stylish(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            "Date: ${widget.flightDate.toString()}",
+                            style: GoogleFonts.stylish(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                            textAlign: TextAlign.left,
+                          ),
+                          SizedBox(height: getProportionateScreenHeight(5)),
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Container(
+                                height: SizeConfig.screenHeight / 7,
+                                color: Colors.transparent,
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.loose,
+                                      child: Container(
+                                          width: SizeConfig.screenWidth / 1.2,
+                                          height: SizeConfig.screenWidth / 4.5,
+                                          color: Colors.transparent,
+                                          child: Column(children: <Widget>[
+                                            Text(
+                                                widget.departureIATA.toString(),
+                                                style: GoogleFonts.hammersmithOne(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            22),
+                                                    color: Colors.white)),
+                                            Text(widget.arrivalTime.toString(),
+                                                style: GoogleFonts.stylish(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            20),
+                                                    color: Colors.white)),
+                                          ])),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    fit: FlexFit.loose,
-                                    child: Container(
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.loose,
+                                      child: Container(
                                         width: SizeConfig.screenWidth / 1.2,
-                                        height: SizeConfig.screenWidth / 4.5,
+                                        height: SizeConfig.screenWidth / 2,
                                         color: Colors.transparent,
-                                        child: Column(children: <Widget>[
-                                          Text(widget.arrivalIATA.toString(),
-                                              style: GoogleFonts.hammersmithOne(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize:
-                                                      getProportionateScreenWidth(
-                                                          22),
-                                                  color: Colors.white)),
-                                        ])),
-                                  ),
-                                ],
-                              )),
-                        )
-                      ],
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(top: 22),
+                                          child: Align(
+                                            alignment: Alignment.topCenter,
+                                            child: Icon(CupertinoIcons.airplane,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.loose,
+                                      child: Container(
+                                          width: SizeConfig.screenWidth / 1.2,
+                                          height: SizeConfig.screenWidth / 4.5,
+                                          color: Colors.transparent,
+                                          child: Column(children: <Widget>[
+                                            Text(widget.arrivalIATA.toString(),
+                                                style: GoogleFonts.hammersmithOne(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            22),
+                                                    color: Colors.white)),
+                                            Text(widget.arrivalTime.toString(),
+                                                style: GoogleFonts.stylish(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize:
+                                                        getProportionateScreenWidth(
+                                                            20),
+                                                    color: Colors.white)),
+                                          ])),
+                                    ),
+                                  ],
+                                )),
+                          )
+                        ],
+                      ),
                     ),
                   ]))),
         ),
