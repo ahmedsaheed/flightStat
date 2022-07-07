@@ -237,10 +237,10 @@ class _GetFlightState extends State<GetFlight> {
                                                             .flight!
                                                             .iata
                                                             .toString(),
-                                                        // flightNo: flight![i]
-                                                        //     .aircraft
-                                                        //     ?.icao
-                                                        //     .toString(),
+                                                        airline: flight![i]
+                                                            .airline
+                                                            ?.name
+                                                            .toString(),
                                                         flightDate: flight![i]
                                                             .departure!
                                                             .scheduled
