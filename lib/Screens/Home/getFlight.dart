@@ -259,6 +259,27 @@ class _GetFlightState extends State<GetFlight> {
                                                             .arrival!
                                                             .airport
                                                             .toString(),
+                                                        departureIATA:
+                                                            flight![i]
+                                                                .departure!
+                                                                .iata
+                                                                .toString(),
+                                                        arrivalIATA: flight![i]
+                                                            .arrival!
+                                                            .iata
+                                                            .toString(),
+                                                        departureTime:
+                                                            flight![i]
+                                                                .departure!
+                                                                .scheduled
+                                                                .toString()
+                                                                .substring(
+                                                                    11, 16),
+                                                        arrivalTime: flight![i]
+                                                            .arrival!
+                                                            .scheduled
+                                                            .toString()
+                                                            .substring(11, 16),
                                                       )));
                                         },
                                         style: TextButton.styleFrom(
