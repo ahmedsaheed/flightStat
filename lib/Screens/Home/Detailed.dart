@@ -165,7 +165,8 @@ class _flightDetailsState extends State<flightDetails> {
                                                         getProportionateScreenWidth(
                                                             22),
                                                     color: Colors.white)),
-                                            Text(widget.arrivalTime.toString(),
+                                            Text(
+                                                widget.departureTime.toString(),
                                                 style: GoogleFonts.stylish(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize:
