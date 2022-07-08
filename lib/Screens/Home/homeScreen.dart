@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                       padding: EdgeInsets.all(15.0),
                       child: SizedBox(
-                        height: 300,
+                        height: 200,
                         child: CupertinoDatePicker(
                           mode: CupertinoDatePickerMode.date,
                           minimumDate: DateTime.now(),

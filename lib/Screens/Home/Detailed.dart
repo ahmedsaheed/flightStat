@@ -150,11 +150,11 @@ class _flightDetailsState extends State<flightDetails> {
                                 color: Colors.white),
                             textAlign: TextAlign.left,
                           ),
-                          SizedBox(height: getProportionateScreenHeight(5)),
+                          //SizedBox(height: getProportionateScreenHeight(5)),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(15),
                             child: Container(
-                                height: SizeConfig.screenHeight / 7,
+                                height: SizeConfig.screenHeight / 9,
                                 color: Colors.transparent,
                                 child: Row(
                                   children: <Widget>[
