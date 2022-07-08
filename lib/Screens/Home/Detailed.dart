@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../models/airport.dart';
 import '../../sizeConfig.dart';
+import 'dart:async';
 
 class flightDetails extends StatefulWidget {
   final String? flightIATA;
@@ -38,10 +39,10 @@ class flightDetails extends StatefulWidget {
 }
 
 class _flightDetailsState extends State<flightDetails> {
-  static double departureLat = 0;
-  static double departureLng = 0;
-  static double arrivalLat = 0;
-  static double arrivalLng = 0;
+  static double? departureLat;
+  static double? departureLng;
+  static double? arrivalLat;
+  static double? arrivalLng;
 
   @override
   void initState() {
@@ -53,8 +54,10 @@ class _flightDetailsState extends State<flightDetails> {
   getDepartueAirport() async {
     Airport depart = await airport(widget.departureIATA.toString());
 
-    departureLat = depart.location!.lat!;
-    departureLng = depart.location!.lon!;
+    setState(() {
+      departureLat = depart.location!.lat!;
+      departureLng = depart.location!.lon!;
+    });
   }
 
   getArrivalAirport() async {
@@ -68,12 +71,40 @@ class _flightDetailsState extends State<flightDetails> {
   late GoogleMapController mapController;
 
 //FOR SOME REASON THE INITIAL LAT & LONG ARE SET TO (0,0) AND ARE ONLY UPDATED ON REFRESH
-  final LatLng _center = LatLng(departureLat, departureLng);
+  final Completer<GoogleMapController> _controller = Completer();
 
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
+  static CameraPosition departure = CameraPosition(
+    target: LatLng(departureLat!, departureLng!),
+    zoom: 8.4746,
+  );
+  static Marker departureMarker = Marker(
+    markerId: const MarkerId('_departureMarker'),
+    position: LatLng(departureLat!, departureLng!),
+    infoWindow: const InfoWindow(title: 'Departure'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+  );
 
+  static Polyline polyline = Polyline(
+    polylineId: PolylineId('polyline'),
+    points: [
+      LatLng(departureLat!, departureLng!),
+      LatLng(arrivalLat!, arrivalLng!),
+    ],
+    color: Colors.red,
+    width: 5,
+  );
+  static CameraPosition arrival = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(arrivalLat!, arrivalLng!),
+      tilt: 59.440717697143555,
+      zoom: 8.151926040649414);
+
+  static Marker arrivalMarker = Marker(
+    markerId: const MarkerId('_arrivalMarker'),
+    position: LatLng(departureLat!, departureLng!),
+    infoWindow: const InfoWindow(title: 'Arrival'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+  );
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -240,15 +271,29 @@ class _flightDetailsState extends State<flightDetails> {
                   ]))),
         ),
         Expanded(
-          child: GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 9.0,
-            ),
-          ),
-        )
+            child: Scaffold(
+                body: GoogleMap(
+                  mapType: MapType.normal,
+                  markers: {departureMarker, arrivalMarker},
+                  polylines: {polyline},
+                  initialCameraPosition: departure,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
+                floatingActionButton: Align(
+                    child: FloatingActionButton.extended(
+                      onPressed: _seeArrival,
+                      label: const Text('Arrival'),
+                      icon: const Icon(CupertinoIcons.airplane),
+                    ),
+                    alignment: Alignment(1, 0.7))))
       ]),
     );
+  }
+
+  Future<void> _seeArrival() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(arrival));
   }
 }
