@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../models/airport.dart';
 import '../../sizeConfig.dart';
 import '../../models/flightDetails.dart';
 import 'dart:math';
@@ -52,6 +53,13 @@ class _GetFlightState extends State<GetFlight> {
         "h " +
         randomNumber.toString() +
         "m";
+  }
+
+  getAirport(String airportAITA) async {
+    List<double> data = [];
+    Airport airports = await airport(airportAITA);
+    data.add(double.parse(airports.location!.lat.toString()));
+    data.add(double.parse(airports.location!.lon.toString()));
   }
 
   whatToDo() {
@@ -280,6 +288,28 @@ class _GetFlightState extends State<GetFlight> {
                                                             .scheduled
                                                             .toString()
                                                             .substring(11, 16),
+                                                        // departureLat:
+                                                        //     getAirport(flight![
+                                                        //             i]
+                                                        //         .departure!
+                                                        //         .iata
+                                                        //         .toString())[0],
+                                                        // departureLng:
+                                                        //     getAirport(flight![
+                                                        //             i]
+                                                        //         .departure!
+                                                        //         .iata
+                                                        //         .toString())[1],
+                                                        // arrivalLat: getAirport(
+                                                        //     flight![i]
+                                                        //         .arrival!
+                                                        //         .iata
+                                                        //         .toString())[0],
+                                                        // arrivalLng: getAirport(
+                                                        //     flight![i]
+                                                        //         .arrival!
+                                                        //         .iata
+                                                        //         .toString())[1],
                                                       )));
                                         },
                                         style: TextButton.styleFrom(

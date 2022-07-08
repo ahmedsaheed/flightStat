@@ -18,6 +18,10 @@ class flightDetails extends StatefulWidget {
   final String? arrivalIATA;
   final String? departureTime;
   final String? arrivalTime;
+  final double? departureLat;
+  final double? departureLng;
+  final double? arrivalLat;
+  final double? arrivalLng;
 
   const flightDetails(
       {Key? key,
@@ -31,7 +35,11 @@ class flightDetails extends StatefulWidget {
       this.departureIATA,
       this.arrivalIATA,
       this.departureTime,
-      this.arrivalTime})
+      this.arrivalTime,
+      this.departureLat,
+      this.departureLng,
+      this.arrivalLat,
+      this.arrivalLng})
       : super(key: key);
 
   @override
