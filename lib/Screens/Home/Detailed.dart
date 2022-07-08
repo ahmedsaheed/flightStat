@@ -75,7 +75,7 @@ class _flightDetailsState extends State<flightDetails> {
 
   static CameraPosition departure = CameraPosition(
     target: LatLng(departureLat!, departureLng!),
-    zoom: 8.4746,
+    zoom: 12.4746,
   );
   static Marker departureMarker = Marker(
     markerId: const MarkerId('_departureMarker'),
@@ -97,11 +97,11 @@ class _flightDetailsState extends State<flightDetails> {
       bearing: 192.8334901395799,
       target: LatLng(arrivalLat!, arrivalLng!),
       tilt: 59.440717697143555,
-      zoom: 8.151926040649414);
+      zoom: 12.151926040649414);
 
   static Marker arrivalMarker = Marker(
     markerId: const MarkerId('_arrivalMarker'),
-    position: LatLng(departureLat!, departureLng!),
+    position: LatLng(arrivalLat!, arrivalLng!),
     infoWindow: const InfoWindow(title: 'Arrival'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
   );
