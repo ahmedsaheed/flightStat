@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../models/airport.dart';
 import '../../sizeConfig.dart';
 
 class flightDetails extends StatefulWidget {
@@ -37,17 +38,44 @@ class flightDetails extends StatefulWidget {
 }
 
 class _flightDetailsState extends State<flightDetails> {
+  double? departureLat;
+  double? departureLng;
+  double? arrivalLat;
+  double? arrivalLng;
+
+  @override
+  void initState() {
+    super.initState();
+    getDepartueAirport();
+    getArrivalAirport();
+  }
+
+  getDepartueAirport() async {
+    Airport depart = await airport(widget.departureIATA.toString());
+    setState(() {
+      departureLat = depart.location!.lat;
+      departureLng = depart.location!.lon;
+    });
+  }
+
+  getArrivalAirport() async {
+    Airport airports = await airport(widget.arrivalIATA.toString());
+    setState(() {
+      arrivalLat = airports.location!.lat;
+      arrivalLng = airports.location!.lon;
+    });
+    print(departureLng);
+    print(departureLat);
+    print(arrivalLng);
+    print(arrivalLat);
+  }
+
   late GoogleMapController mapController;
 
   final LatLng _center = const LatLng(53.3379, -6.2591);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
