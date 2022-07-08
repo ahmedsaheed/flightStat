@@ -52,10 +52,13 @@ class _flightDetailsState extends State<flightDetails> {
 
   getDepartueAirport() async {
     Airport depart = await airport(widget.departureIATA.toString());
+    print("Test ${depart.location!.lat}");
     setState(() {
       departureLat = depart.location!.lat;
       departureLng = depart.location!.lon;
     });
+    print(departureLng);
+    print(departureLat);
   }
 
   getArrivalAirport() async {
@@ -64,8 +67,7 @@ class _flightDetailsState extends State<flightDetails> {
       arrivalLat = airports.location!.lat;
       arrivalLng = airports.location!.lon;
     });
-    print(departureLng);
-    print(departureLat);
+
     print(arrivalLng);
     print(arrivalLat);
   }
