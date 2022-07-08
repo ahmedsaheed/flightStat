@@ -38,10 +38,10 @@ class flightDetails extends StatefulWidget {
 }
 
 class _flightDetailsState extends State<flightDetails> {
-  double? departureLat;
-  double? departureLng;
-  double? arrivalLat;
-  double? arrivalLng;
+  static double departureLat = 0;
+  static double departureLng = 0;
+  static double arrivalLat = 0;
+  static double arrivalLng = 0;
 
   @override
   void initState() {
@@ -52,29 +52,23 @@ class _flightDetailsState extends State<flightDetails> {
 
   getDepartueAirport() async {
     Airport depart = await airport(widget.departureIATA.toString());
-    print("Test ${depart.location!.lat}");
-    setState(() {
-      departureLat = depart.location!.lat;
-      departureLng = depart.location!.lon;
-    });
-    print(departureLng);
-    print(departureLat);
+
+    departureLat = depart.location!.lat!;
+    departureLng = depart.location!.lon!;
   }
 
   getArrivalAirport() async {
     Airport airports = await airport(widget.arrivalIATA.toString());
     setState(() {
-      arrivalLat = airports.location!.lat;
-      arrivalLng = airports.location!.lon;
+      arrivalLat = airports.location!.lat!;
+      arrivalLng = airports.location!.lon!;
     });
-
-    print(arrivalLng);
-    print(arrivalLat);
   }
 
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(53.3379, -6.2591);
+//FOR SOME REASON THE INITIAL LAT & LONG ARE SET TO (0,0) AND ARE ONLY UPDATED ON REFRESH
+  final LatLng _center = LatLng(departureLat, departureLng);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
