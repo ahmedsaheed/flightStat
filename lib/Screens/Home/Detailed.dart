@@ -244,7 +244,7 @@ class _flightDetailsState extends State<flightDetails> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 9.0,
             ),
           ),
         )
