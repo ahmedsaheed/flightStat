@@ -1,16 +1,24 @@
-# job
+<h1 align="center">Flight Stat ✈️</h1>
+<samp align= "center">Very simple flutter application for flight checkup. Developed to solidify my understanding of flutter state management, http request and geolocation mapping.</samp>
 
-A new Flutter project.
+<p align="center">
+<samp>What was used ?<samp>
+</p>
 
-## Getting Started
+<p align="center">
 
-This project is a starting point for a Flutter application.
+  <samp>
+    <a href="https://pub.dev/packages/http">http package</a> .
+    <a href="https://aviationstack.com/documentation">Aviationstack API </a> .
+    <a href="https://rapidapi.com/aedbx-aedbx/api/aerodatabox/">AeroDataBox API</a> .
+    <a href="https://developers.google.com/maps">Google Maps API</a> 
+  </samp>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+<p align="center">
+<samp>Quick Demo<samp>
+</p>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://user-images.githubusercontent.com/87912847/178112007-cf80af94-efc3-429b-b4f6-43f8bc37e1f3.mov
+
