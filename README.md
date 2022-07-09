@@ -16,11 +16,12 @@
 </p>
 
 <p align="center">
-<samp>Quick Demo<samp>
-</p>
+
 
 <details>
-<summary>How does it look tho ?</summary>
+<summary><samp>Quick Demo<samp></summary>
 
 https://user-images.githubusercontent.com/87912847/178112007-cf80af94-efc3-429b-b4f6-43f8bc37e1f3.mov
 </details>
+
+</p>
