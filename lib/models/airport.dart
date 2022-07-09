@@ -7,7 +7,7 @@ import 'dart:io';
 Future<Airport> airport(String departure) async {
   final response = await http.get(
     Uri.parse(
-        'https://aerodatabox.p.rapidapi.com/airports/iata/$departure/?rapidapi-key=349a00db28msh2176012c0ef1149p17700cjsn20907c3c5805'),
+        'https://aerodatabox.p.rapidapi.com/airports/iata/$departure/?rapidapi-key=e0fb042ce8mshee7ed4fb9a9a799p171e9djsnd50f44dfd12d'),
   );
   try {
     if (response.statusCode == 200) {

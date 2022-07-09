@@ -21,6 +21,7 @@ class _GetFlightState extends State<GetFlight> {
   List<FlightData>? flight;
   bool isLoaded = false;
   bool isFound = false;
+  bool isError = false;
 
   @override
   void initState() {
@@ -37,10 +38,11 @@ class _GetFlightState extends State<GetFlight> {
         isLoaded = true;
         isFound = true;
       });
+    } else {
+      isError = true;
     }
   }
 
-//"Airline Name: ${flight![i].airline!.name}\nNumber: ${flight![i].flight!.number}\nArrival: ${flight![i].arrival!.iata}\nArrival Time: ${flight![i].arrival!.scheduled}(${flight![i].arrival!.timezone})\nArrival Terminal:${flight![i].arrival!.terminal}\nArrival Gate:${flight![i].arrival!.gate}\nDeparture: ${flight![i].departure!.iata}\nDeparture Time: ${flight![i].departure!.scheduled}(${flight![i].departure!.timezone})\nDeparture Terminal:${flight![i].departure!.terminal}\nDeparture Gate:${flight![i].departure!.gate}\nFlight Status: ${flight![i].flightStatus}",
   timeDiff(DateTime? departure, DateTime? arrival) {
     Random random = new Random();
     int randomNumber = random.nextInt(50) + 10;
@@ -60,11 +62,11 @@ class _GetFlightState extends State<GetFlight> {
     Airport airports = await airport(airportAITA);
     data.add(double.parse(airports.location!.lat.toString()));
     data.add(double.parse(airports.location!.lon.toString()));
+    return data;
   }
 
   whatToDo() {
     if (isFound && isLoaded) {
-      print(flight![0].departure!.scheduled);
       return SafeArea(
           child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -246,8 +248,8 @@ class _GetFlightState extends State<GetFlight> {
                                                             .iata
                                                             .toString(),
                                                         airline: flight![i]
-                                                            .airline
-                                                            ?.name
+                                                            .airline!
+                                                            .name
                                                             .toString(),
                                                         flightDate: flight![i]
                                                             .departure!
@@ -364,6 +366,15 @@ class _GetFlightState extends State<GetFlight> {
               );
             }),
       ));
+    } else {
+      return Center(
+        child: Text('No flights found',
+            style: GoogleFonts.hammersmithOne(
+              fontSize: SizeConfig.screenWidth / 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            )),
+      );
     }
   }
 
